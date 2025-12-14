@@ -1,7 +1,7 @@
 # Asp.Net Core Web API + Angular 16 — DevOps Focus
 
 This repository is a **fork** of the original CRUD project and has been extended to demonstrate **DevOps, containerization, and runtime architecture concepts**.  
-The goal is not feature development, but to practice real-world concerns such as container builds, orchestration, configuration, and deployment readiness. :contentReference[oaicite:3]{index=3}
+The goal is not feature development, but to practice real-world concerns such as container builds, orchestration, configuration, and deployment readiness. 
 
 ---
 
