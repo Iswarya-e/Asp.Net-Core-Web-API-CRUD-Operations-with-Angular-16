@@ -1,55 +1,68 @@
-# Asp.Net-Core-Web-API-CRUD-Operations-with-Angular-16
-Demo project showing Asp.Net Core Web API CRUD Operations with Angular 16.
+Project Overview
 
-Points discussed :
-_____________________
-- Create Asp.Net Core API
-- DEFINE EF Model & DB Context Class
-- DB Migration
-- Create Controller
-- HOW DI Works in ASP.NET Core
-- Things You Should Before Moving to Angular App
-- Case Conversion
-- Create Angular App
-- APP Structure
-- Let's start designing the App
-- Retrive Existing List of Records.
-- Retrieve and Display Existing Records in Angular App.
-- Configure/Enable CORS Policy
-- Render an Array of Objects in Angular
-- Design an Angular Form
-- Submit the Form
-- Reset Form
-- Toast Notification
-- Angular Form Validation
-- Update & Delete Operation
+This project demonstrates DevOps, containerization, and runtime architecture concepts using a simple Payment API as the application layer.
 
- ## How it works ?
- 
- 
- :tv: Video tutorial on this same topic  
- Url : https://youtu.be/OZGdKYzUYvU
- 
- <a href="http://www.youtube.com/watch?feature=player_embedded&v=OZGdKYzUYvU
-" target="_blank"><img src="http://img.youtube.com/vi/OZGdKYzUYvU/0.jpg" 
-alt="Video Tutorial for Asp.Net Core 7.0 Web API and Angular 16 CRUD" width="500" height="400" border="10" /></a>
+The business logic is intentionally kept minimal. The primary goal of this repository is to showcase:
+
+- Docker & Docker Compose
+- Service-to-service networking
+- Environment-based configuration
 
 
-| :bar_chart:               |  List of Tutorials   |   | :moneybag:           | Support Us                           |
-|--------------------------:|:---------------------|---|---------------------:|:-------------------------------------|
-| Angular                   |http://bit.ly/2KQN9xF |   |Paypal                | https://goo.gl/bPcyXW                |
-| Asp.Net Core              |http://bit.ly/30fPDMg |   |Amazon   Affiliate    | https://geni.us/JDzpE                |
-| React                     |http://bit.ly/325temF |   |
-| Python                    |http://bit.ly/2ws4utg |   | :point_right:        | Follow Us                            |
-| Node.js                   |https://goo.gl/viJcFs |   |Website               |http://www.codaffection.com          |
-| Asp.Net MVC               |https://goo.gl/gvjUJ7 |   |YouTube               |https://www.youtube.com/codaffection  |
-| Flutter                   |https://bit.ly/3ggmmJz|   |Facebook              |https://www.facebook.com/codaffection |
-| Web API                   |https://goo.gl/itVayJ |   |Twitter               |https://twitter.com/CodAffection      |
-| MEAN Stack                |https://goo.gl/YJPPAH |   |
-| C# Tutorial               |https://goo.gl/s1zJxo |   |
-| Asp.Net WebForm           |https://goo.gl/GXC2aJ |   |
-| C# WinForm                |https://goo.gl/vHS9Hd |   |
-| MS SQL                    |https://goo.gl/MLYS9e |   |
-| Crystal Report            |https://goo.gl/5Vou7t |   |
-| CG Exercises in C Program |https://goo.gl/qEWJCs |   |
+Architecture Overview
+
+High-level flow:
+
+-Client → API Container → Database Container
+
+Components:
+
+-Payment API – ASP.NET Core Web API
+
+-Database – SQL Server (containerized)
+
+-Docker Network – Internal bridge network for service communication
+
+Key design principles:
+
+-Stateless API service
+-Container-to-container communication via service names
+-Externalized configuration via environment variables
+
+
+
+🐳 Docker & Containerization
+Dockerfile
+
+-Multi-stage build for optimized image size
+-Separation of build and runtime layers
+-Uses official .NET SDK and runtime images
+
+Docker Compose
+-Orchestrates API and database containers
+-Defines isolated Docker network
+-Uses named volumes for database persistence
+-Environment variables injected at runtime
+
+This setup mimics local production-like behavior rather than simple development execution.
+
+🚀 How to Run Locally
+Prerequisites
+
+-Docker
+-Docker Compose
+
+Steps
+docker compose up --build
+
+API will be available at:
+
+http://localhost:<exposed-port>
+🧪 DevOps Focus Areas Demonstrated
+
+Docker image optimization
+Containerisation of applications
+Container networking
+
+
 

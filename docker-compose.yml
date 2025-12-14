@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Test@1234567890"
+    ports:
+      - "1433:1433"
+    networks:
+      - payment-net
+
+  paymentapi:
+    image: iswarya15/paymentapi:latest
+    container_name: paymentapi
+    environment:
+      DB_SERVER: sqlserver
+      DB_PASSWORD: "Test@1234567890"
+    ports:
+      - "8081:80"
+    depends_on:
+      - sqlserver
+    networks:
+      - payment-net
+
+  paymentmfe:
+    image: iswarya15/paymentmfe:latest
+    container_name: paymentmfe
+    environment:
+      API_BASE_URL: "http://localhost:8081/api"
+    ports:
+      - "3000:80"
+    depends_on:
+      - paymentapi
+    networks:
+      - payment-net
+
+networks:
+  payment-net:
+    driver: bridge
+
