@@ -1,58 +1,100 @@
-Project Overview
+# Asp.Net Core Web API + Angular 16 — DevOps Focus
 
-This project demonstrates DevOps, containerization, and runtime architecture concepts using a simple Payment API as the application layer.
+This repository is a **fork** of the original CRUD project and has been extended to demonstrate **DevOps, containerization, and runtime architecture concepts**.  
+The goal is not feature development, but to practice real-world concerns such as container builds, orchestration, configuration, and deployment readiness. :contentReference[oaicite:3]{index=3}
 
-The business logic is intentionally kept minimal(Project Forked from https://github.com/CodAffection/Asp.Net-Core-Web-API-CRUD-Operations-with-Angular-16.git). The primary goal of this repository is to showcase:
+---
 
-- Docker & Docker Compose
-- Service-to-service networking
-- Environment-based configuration
+## 🚀 Project Purpose
 
-Architecture Overview
+This project shows how to:
+- Containerize an ASP.NET Core API + Angular app
+- Use Docker Compose & link services
+- Configure environment variables
+- Handle runtime networking
+- Persist data using named volumes
+- Prepare a reproducible local environment
 
-High-level flow:
+The focus is on **DevOps readiness**, not application feature complexity.
 
-- Client → API Container → Database Container
+---
 
-Components:
+## 📦 Stack
 
-- Payment API – ASP.NET Core Web API
-- Database – SQL Server (containerized)
-- Docker Network – Internal bridge network for service communication
-- Docker volumes
+| Component | Technology |
+|-----------|------------|
+| Backend | ASP.NET Core Web API (.NET) |
+| Frontend | Angular 16 |
+| DB | SQL Server (containerized) |
+| Containerization | Docker + Docker Compose |
+| Deployment | Local environment with compose |
+
+---
+
+## 🧠 Architecture
+
+Client → API Container → Database Container
+
+**Key principles:**
+- Stateless API
+- Docker networking between services
+- Environment-based config via env vars
+
+---
+
+## 🐳 Docker Setup
+
+### Dockerfile
+- Multi-stage build for optimized image sizes
+- Separation of build + runtime layers
+
+### Docker Compose
+- Compose defines:
+  - API and DB services
+  - Docker bridge network
+  - Named volumes to persist data
+  - Environment variables at runtime
+
+Run:
+```
+docker compose up --build
+```
+
+API will be available at `http://localhost:3000` after containers start.
+
+---
+
+## ⚙️ Configuration
+
+- Environment variables provided in compose
+
+---
+
+## 🛠 What I Improved
+
+- Dockerization of backend & frontend
+- Docker network setup
+- Proper compose configuration
+- `.gitignore` cleanup
 - 
-Key design principles:
-
-- Stateless API service
-- Container-to-container communication via service names
-- Externalized configuration via environment variables
+---
 
 
+## 📌 Local Run Instructions
 
-**🐳 Docker & Containerization
-**Docker file:
-- Multi-stage build for optimized image size
-- Separation of build and runtime layers
-- Uses official .NET SDK and runtime images
-
-Docker Compose:
-- Defines isolated Docker network
-- Uses named volumes for database persistence
-- Environment variables injected at runtime
-
-**How to Run Locally
-**
-Prerequisites
+### Prerequisites
 - Docker
 - Docker Compose
 
-Steps
-docker compose up 
+### Steps
+```bash
+docker compose up --build
+```
 
-API will be available at:
-
-http://localhost:<exposed-port>
-
-
+Access the web app or API at the exposed ports.
 
 
+## 📎 Attribution
+
+This project is forked from:
+https://github.com/CodAffection/Asp.Net-Core-Web-API-CRUD-Operations-with-Angular-16.git
