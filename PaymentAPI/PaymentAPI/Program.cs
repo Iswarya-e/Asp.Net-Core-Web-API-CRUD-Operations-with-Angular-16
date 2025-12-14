@@ -7,14 +7,37 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000") // your MFE origin
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+; // if you need cookies or auth
+    });
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+var dbServer = Environment.GetEnvironmentVariable("DB_SERVER") ?? "localhost";
+var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? "YourStrong!Passw0rd";
 
+// Replace placeholders in connection string
+var connectionString = builder.Configuration
+    .GetConnectionString("DevConnection")
+    .Replace("${DB_SERVER}", dbServer)
+    .Replace("${DB_PASSWORD}", dbPassword);
 builder.Services.AddDbContext<PaymentDetailContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
+options.UseSqlServer(connectionString));
 
 var app = builder.Build();
+app.UseCors("AllowFrontend");
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<PaymentDetailContext>();
+    db.Database.EnsureCreated();  // Creates DB and tables if they don't exist
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -22,12 +45,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(options =>
-options.WithOrigins("http://localhost:4200")
-.AllowAnyMethod()
-.AllowAnyHeader());
-
-app.UseAuthorization();
 
 app.MapControllers();
 

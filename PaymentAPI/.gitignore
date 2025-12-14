@@ -1,0 +1,65 @@
+# ===============================
+# Build results
+# ===============================
+bin/
+obj/
+out/
+
+# ===============================
+# Visual Studio / Rider / VS Code
+# ===============================
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ===============================
+# .NET Core / SDK
+# ===============================
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ===============================
+# Logs
+# ===============================
+*.log
+logs/
+
+# ===============================
+# Environment & secrets
+# ===============================
+.env
+.env.*
+!.env.example
+secrets.json
+appsettings.*.json
+!appsettings.Development.json
+
+# ===============================
+# Database (local only)
+# ===============================
+*.mdf
+*.ldf
+*.db
+*.sqlite
+
+# ===============================
+# OS files
+# ===============================
+.DS_Store
+Thumbs.db
+
+# ===============================
+# Test results
+# ===============================
+TestResults/
+coverage/
+
+# ===============================
+# Publish output
+# ===============================
+publish/

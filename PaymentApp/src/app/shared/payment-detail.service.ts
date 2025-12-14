@@ -3,18 +3,23 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { PaymentDetail } from './payment-detail.model';
 import { NgForm } from "@angular/forms";
-
+declare global {
+  interface Window { _env_: any; }
+}
 @Injectable({
   providedIn: 'root'
 })
+
 export class PaymentDetailService {
 
-  url: string = environment.apiBaseUrl + '/PaymentDetail'
+  url: string;
   list: PaymentDetail[] = [];
   formData: PaymentDetail = new PaymentDetail()
   formSubmitted: boolean = false;
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) { 
+    const baseUrl = window._env_?.API_BASE_URL;
+    this.url = `${baseUrl}/PaymentDetail`;
+  }
   refreshList() {
     this.http.get(this.url)
       .subscribe({
