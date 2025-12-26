@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: mfe-deployment
+spec:
+  replicas: 3
+  selector: 
+    matchLables: 
+      app: payment-mfe
+  template:
+    metadata:
+      labels:  
+        app: payment-mfe
+    containers:
+      - image: iswarya15/paymentmfe:latest
+        env:
+          - name: API_BASE_URL
+            valueFrom:
+              configMapKeyRef:
+                key: API_BASE_URL
+         ports:
+           - port: 80

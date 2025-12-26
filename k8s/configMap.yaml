@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-configmap
+data:
+  DB_SERVER: sqlserver
+  API_BASE_URL: "http://ms-service:8081/api"
+  ACCEPT_EULA: "Y"

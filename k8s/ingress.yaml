@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mfe-ingress
+spec:
+  ingressClassName: nginx
+  rules: 
+    - host: paymentapp.com
+      http:
+        paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            resource:
+              service:  
+                name: mfe-service
+                port:
+                  number: 80
+
+
+

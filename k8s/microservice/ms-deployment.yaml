@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-microservice-deployment
+spec:
+  replicas: 3
+  selector:  
+    matchLabels:
+      app: payment-app
+  template: 
+    metadata:
+      labels:
+        app: payment-app
+    spec:
+      containers:
+        - name: payment-app-container
+          image: iswarya15/paymentapi:latest
+          env:
+            - name: DB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: payment-configmap
+                  key: DB_SERVER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+		  name: payment-secret
+                  key: DB_PASSWORD
+          ports:
+            - containerPort: 80 

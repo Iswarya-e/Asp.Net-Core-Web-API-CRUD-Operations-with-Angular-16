@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-stateful-set
+spec:
+  selector:
+    matchLabels:
+      app: sql-server
+  replicas: 3
+  serviceName: db-headless-service 
+  template:
+    metadata:  
+      labels:
+        app: sql-server
+    spec: 
+      containers:
+        - name: sql-server
+          image: mcr.microsoft.com/mssql/server:2022-latest
+          env:
+            - name: ACCEPT_EULA
+              valueFrom:
+                configMapKeyRef:
+                  name: payment-configmap
+                  key: ACCEPT_EULA
+            - name: SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: payment-secret
+                  key: DB_PASSWORD
+          ports:
+            - containerPort: 1433
+              name: sql-server-port
+          volumeMounts:
+            - name: db-data
+              mountPath: /usr/share/sql-data
+  volumeClaimTemplates:
+    - metadata:
+        name: db-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+
