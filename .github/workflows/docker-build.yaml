@@ -28,7 +28,7 @@ jobs:
           file: ../../PaymentAPI/Dockerfile
           push: true
           platforms: linux/amd64
-          tags: <dockerhub-username>/paymentapi:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/paymentapi:latest
 
       - name: Build & Push MS
         uses: docker/build-push-action@v4
@@ -37,4 +37,4 @@ jobs:
           file: ../../PaymentApp/Dockerfile
           push: true
           platforms: linux/amd64
-          tags: <dockerhub-username>/paymentmfe:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/paymentmfe:latest
