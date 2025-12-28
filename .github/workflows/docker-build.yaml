@@ -24,8 +24,8 @@ jobs:
       - name: Build & Push MFE
         uses: docker/build-push-action@v4
         with:
-          context: ../../PaymentAPI
-          file: ../../PaymentAPI/Dockerfile
+          context: ./PaymentAPI
+          file: ./PaymentAPI/Dockerfile
           push: true
           platforms: linux/amd64
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/paymentapi:latest
@@ -33,8 +33,8 @@ jobs:
       - name: Build & Push MS
         uses: docker/build-push-action@v4
         with:
-          context: ../../PaymentApp
-          file: ../../PaymentApp/Dockerfile
+          context: ./PaymentApp
+          file: ./PaymentApp/Dockerfile
           push: true
           platforms: linux/amd64
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/paymentmfe:latest
