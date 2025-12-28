@@ -11,7 +11,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.AllowAnyOrigin() // your MFE origin
+        policy.WithOrigins(
+                "http://paymentapp.com",
+                "http://212.2.254.105") // your MFE origin
               .AllowAnyHeader()
               .AllowAnyMethod()
 ; // if you need cookies or auth
