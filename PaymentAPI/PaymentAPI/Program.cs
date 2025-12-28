@@ -11,7 +11,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000") // your MFE origin
+        policy.AllowAnyOrigin() // your MFE origin
               .AllowAnyHeader()
               .AllowAnyMethod()
 ; // if you need cookies or auth
